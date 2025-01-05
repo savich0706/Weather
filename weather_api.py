@@ -25,7 +25,8 @@ def get_weather(coordinates: Coordinates) -> Weather:
         sunrise=datetime(2025, 1, 5, 8, 12, 0),
         sunset=datetime(2025, 1, 5, 16, 3, 0)
     )
-    
-weather = get_weather(Coordinates(57.6, 13.2))
 
-print(weather.temperature)
+
+if __name__ == '__main__':    
+    weather = get_weather(Coordinates(57.6, 13.2))
+    print(weather.temperature)
