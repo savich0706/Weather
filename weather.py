@@ -6,10 +6,12 @@ from weather_api import get_weather
 def main():
     coordinates = get_coordinates()
     weather = get_weather(coordinates)
-    output = correct_print(weather)
-    print(output)
+    correct_weather = correct_print(weather)
+    return correct_weather
     
-if __name__ == 'main':
-    main()
+    
+if __name__ == '__main__':
+    result = main()
+    print(result)
     
     

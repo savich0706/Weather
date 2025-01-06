@@ -12,27 +12,12 @@ class IPAdress(NamedTuple):
     my_ip: str    
 
 
-class InformationByIP(NamedTuple):
-    city: str
-    latitude: float
-    longitude: float
-
-
-class City(NamedTuple):
-    city: str
-
-
 def get_coordinates() -> Coordinates:
     '''Получаем свои координаты GPS'''
     data = _get_data_by_ip()
-    latitude = data.latitude
-    longitude = data.longitude
+    latitude = data['latitude']
+    longitude = data['longitude']
     return Coordinates(latitude=latitude, longitude=longitude)
-
-
-def get_city() -> City:
-    data = _get_data_by_ip()
-    return City(city=data.city)
 
 
 def _get_my_ip() -> IPAdress:
@@ -47,7 +32,7 @@ def _get_my_ip() -> IPAdress:
         raise CantGetIPAdress
 
 
-def _get_data_by_ip() -> InformationByIP:
+def _get_data_by_ip() -> dict:
     '''Через свой IP-адрес получаем город и координаты (широту и долготу) 
         с помощью API ipwhois'''
     try:
@@ -56,9 +41,7 @@ def _get_data_by_ip() -> InformationByIP:
         response = requests.get(url)
         response.raise_for_status()  # Обработка ошибок HTTP
         data = response.json()
-        return InformationByIP(city=data['city'],
-                               latitude=data['latitude'], 
-                               longitude=data['longitude'])
+        return data
                              
     except:
         raise CantGetInformationByIP
@@ -66,5 +49,4 @@ def _get_data_by_ip() -> InformationByIP:
 
 if __name__ == '__main__':
     coord = get_coordinates()
-    city = get_city()
-    print(f'Широта: {coord.latitude}\nДолгота: {coord.longitude}\nГород: {city.city}')
+    print(f'Широта: {coord.latitude}\nДолгота: {coord.longitude}\n')
