@@ -58,7 +58,6 @@ def _get_data_by_response(latitude, longitude) -> Weather:
             )
         return result_data
     except Exception as e:
-        print(f'ошибка: {e}')
         raise CantGetWeather
     
 

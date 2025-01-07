@@ -2,7 +2,7 @@ class CantGetIPAdress(Exception):
     '''Ошибка получения IP-адреса'''
     
     
-class CantGetInformationByIP(Exception):
+class CantGetCoordinatesByIP(Exception):
     '''Ошибка получения информации по IP-адресу'''
     
     

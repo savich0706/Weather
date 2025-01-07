@@ -1,6 +1,6 @@
 from typing import NamedTuple
 import requests
-from exceptions import CantGetIPAdress, CantGetInformationByIP
+from exceptions import CantGetIPAdress, CantGetCoordinatesByIP
 
 
 class Coordinates(NamedTuple):
@@ -42,9 +42,10 @@ def _get_data_by_ip() -> dict:
         response.raise_for_status()  # Обработка ошибок HTTP
         data = response.json()
         return data
-                             
+    except CantGetIPAdress:
+        raise CantGetIPAdress                         
     except:
-        raise CantGetInformationByIP
+        raise CantGetCoordinatesByIP
 
 
 if __name__ == '__main__':
